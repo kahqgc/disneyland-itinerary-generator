@@ -3,8 +3,10 @@ const input = require('readline-sync');
 //Class constructor
 class Ride {
     static allRides = [];
+    static nextId = 0;
 
     constructor(name, popularity, waitTime = 30) {
+        this.id = Ride.nextId++;
         this.name = name;
         this.popularity = popularity;
         this.waitTime = waitTime;
@@ -27,4 +29,17 @@ const itsASmallWorld = new Ride(`It's a Small World`, 5, 15);
 visitTime = input.question('How many hours will you visit? ');
 let visitTimeInMinutes = (Number(visitTime) * 60);
 
-console.log(`You can ride ${piratesOfTheCaribbean.name} this many times: ${visitTimeInMinutes/piratesOfTheCaribbean.waitTime}`)
+console.log("***************")
+
+Ride.allRides.forEach(ride => {
+    console.log(`${ride.name} - ${ride.id}`);
+});
+favoriteRide = input.question('What is your favorite ride (select number above)? ');
+let favoriteRideID = (Number(favoriteRide));
+let favoriteRideName = Ride.allRides[favoriteRideID].name
+let favoriteRideWaitTime = Ride.allRides[favoriteRideID].waitTime
+
+console.log("***************")
+
+//Output
+console.log(`You can ride ${favoriteRideName} this many times: ${visitTimeInMinutes/favoriteRideWaitTime}`)
